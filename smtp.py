@@ -4,9 +4,9 @@ import re
 from bs4 import BeautifulSoup
 import requests
 from email.utils import formataddr
-my_sender = "369212851@qq.com"
-my_pwd = "tkkterceepmhbigi"
-receiver = "369212851@qq.com"
+my_sender = "369212851@qq.com" #sender's email
+my_pwd = "your smtp password"
+receiver = "369212851@qq.com"#receiver's email
 
 
 def spider():
