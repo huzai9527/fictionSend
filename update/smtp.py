@@ -4,6 +4,7 @@ import re
 from bs4 import BeautifulSoup
 import requests
 from email.utils import formataddr
+
 my_sender = "369212851@qq.com"
 my_pwd = "tkkterceepmhbigi"
 receiver = "369212851@qq.com"
@@ -33,15 +34,14 @@ def spider():
     return list
 
 
-def mail():
-    list = spider();
+def mail(list0):
     ret = True
     try:
-        mail_msg = list.__getitem__(1).__str__()
+        mail_msg = list0.__getitem__(1).__str__()
         msg = MIMEText(mail_msg, 'html', 'utf-8')
         msg['From'] = formataddr(['huzai', my_sender])
         msg['To'] = formataddr(['huzai', receiver])
-        msg['Subject'] = list.__getitem__(0)
+        msg['Subject'] = list0.__getitem__(0)
         server = smtplib.SMTP_SSL('smtp.qq.com', 465)
         server.login(my_sender, my_pwd)
         server.sendmail(my_sender, [receiver], msg.as_string())
@@ -51,9 +51,20 @@ def mail():
     return ret
 
 
-ret = mail()
-if(ret):
-    print('邮件发送成功')
-else:
-    print('邮件发送失败')
-
+list = spider();
+with open('origin.txt', 'rb') as f0:
+    origin = f0.read().decode('utf-8')
+    now = list.__getitem__(1).__str__()
+    for i in range(0, len(now)):
+        if origin[i] != now[i] :
+            ret = mail(list)
+            with open('origin.txt', 'wb+') as f1:
+                f1.write(now[i:].encode('utf-8'))
+            if ret:
+                print('邮件发送成功,并成功写入origin.txt')
+            else:
+                print('邮件发送失败')
+            break
+        else:
+            print("还没跟新！不发送")
+            break
