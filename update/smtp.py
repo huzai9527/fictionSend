@@ -6,7 +6,7 @@ import requests
 from email.utils import formataddr
 
 my_sender = "369212851@qq.com"
-my_pwd = "tkkterceepmhbigi"
+my_pwd = "your password"#输入你自己的密码
 receiver = "369212851@qq.com"
 
 
