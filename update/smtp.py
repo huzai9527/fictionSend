@@ -55,16 +55,16 @@ list = spider();
 with open('origin.txt', 'rb') as f0:
     origin = f0.read().decode('utf-8')
     now = list.__getitem__(1).__str__()
-    for i in range(0, len(now)):
-        if origin[i] != now[i] :
-            ret = mail(list)
-            with open('origin.txt', 'wb+') as f1:
-                f1.write(now[i:].encode('utf-8'))
-            if ret:
-                print('邮件发送成功,并成功写入origin.txt')
-            else:
-                print('邮件发送失败')
-            break
+    if origin[30:40] != now[30:40]:
+        ret = mail(list)
+        with open('origin.txt', 'wb+') as f1:
+            f1.write(now.encode('utf-8'))
+        if ret:
+            print('邮件发送成功,并成功写入origin.txt')
         else:
-            print("还没跟新！不发送")
-            break
+            print('邮件发送失败')
+
+    else:
+        print("还没跟新！不发送")
+
+

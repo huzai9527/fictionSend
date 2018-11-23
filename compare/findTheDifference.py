@@ -27,7 +27,7 @@ content = html.select('div#content')
 
 origin = open('1.txt', 'rb').read()
 now = open('2.txt', 'r').read()
-for i in range(0, len(now)):
-    if origin[i] != now[i]:
-        print(now[i:])
-        break
+
+if origin[0:3] != now[0:3]:
+    print(now)
+
